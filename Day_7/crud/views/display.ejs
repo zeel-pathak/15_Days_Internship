@@ -6,6 +6,7 @@
             <th>Name</th>
             <th>Author</th>
             <th>Price</th>
+            <th>Action</th>
         </tr>
 
         <% for(var i=0; i< db_rows_array.length;i++){%>
@@ -15,6 +16,7 @@
                 <td><%= db_rows_array[i].Title %></td>
                 <td><%= db_rows_array[i].author %></td>
                 <td><%= db_rows_array[i].price %></td>
+                <td>   <a href="/edit/<%= db_rows_array[i].bookId %>">Edit</a>  | <a href="/delete/<%= db_rows_array[i].bookId %>">Delete</a></td>
             </tr>
 
             <%}%>
@@ -24,3 +26,5 @@
     <%}else{%>
      No Records Found
      <%}%>
+
+     <h1><a href="/add">Add Books</a></h1>

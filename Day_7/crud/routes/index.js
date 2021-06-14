@@ -13,7 +13,7 @@ router.get('/add', function(req, res, next) {
 });
 
 router.post('/add-process', function(req, res, next) {
-  console.log(req.body);
+
 
   const mybodydata = {
     bookId: req.body.BookId,
@@ -35,9 +35,55 @@ router.get('/display',function(req,res,next){
       db.query("select * from books ",function(err,db_rows){
 
         if(err) throw err;
-        console.log(db_rows);
+      
         res.render('display',{db_rows_array:db_rows});
       });
+
+});
+
+router.get('/delete/:id',function(req,res,next){
+
+  var deleteid = req.params.id;
+  console.log(deleteid);
+  db.query("delete from books where bookId = ?",[deleteid],function(err,db_rows){
+
+    if(err) throw err;
+    console.log(db_rows);
+    res.redirect('/display');
+  });
+
+});
+
+router.get('/edit/:id',function(req,res,next){
+
+  var editid = req.params.id;
+  console.log(editid);
+  db.query("select * from books where bookId = ?",[editid],function(err,db_rows){
+
+    if(err) throw err;
+ 
+    res.render('edit',{db_rows_array:db_rows });
+  });
+
+});
+
+router.post('/edit/:id',function(req,res,next){
+
+  var editid = req.params.id;
+  
+  
+  var name =  req.body.name;
+  var aname =  req.body.authorname;
+  var price = req.body.price;
+
+
+  console.log(editid);
+  db.query("update books set Title = ?, author = ?, price = ? where bookId = ?",[name, aname, price, editid],function(err,db_rows){
+
+    if(err) throw err;
+    console.log(err);
+    res.redirect('/display');
+  });
 
 });
 
