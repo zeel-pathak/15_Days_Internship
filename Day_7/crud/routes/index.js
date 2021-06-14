@@ -30,4 +30,15 @@ router.post('/add-process', function(req, res, next) {
 
 });
 
+router.get('/display',function(req,res,next){
+
+      db.query("select * from books ",function(err,db_rows){
+
+        if(err) throw err;
+        console.log(db_rows);
+        res.render('display',{db_rows_array:db_rows});
+      });
+
+});
+
 module.exports = router;

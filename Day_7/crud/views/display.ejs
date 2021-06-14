@@ -1,0 +1,26 @@
+<% if(db_rows_array.length > 0 ){ %>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Price</th>
+        </tr>
+
+        <% for(var i=0; i< db_rows_array.length;i++){%>
+
+            <tr>
+                <td><%= db_rows_array[i].bookId %></td>
+                <td><%= db_rows_array[i].Title %></td>
+                <td><%= db_rows_array[i].author %></td>
+                <td><%= db_rows_array[i].price %></td>
+            </tr>
+
+            <%}%>
+
+    </table>
+
+    <%}else{%>
+     No Records Found
+     <%}%>
